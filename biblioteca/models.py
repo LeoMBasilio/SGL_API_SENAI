@@ -11,7 +11,7 @@ class Livros(models.Model):
         return self.titulo
 
 class usuarios(models.Model):
-    nome = models.CharField(max_length=100)
+    nome = models.CharField(max_length=100, null=True)
     cpf = models.CharField(max_length=11, unique=True)
     email = models.EmailField(max_length=100, unique=True)
     celular = models.CharField(max_length=15)

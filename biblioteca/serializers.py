@@ -2,7 +2,7 @@ from .models import Livros, usuarios, locacao
 from rest_framework import serializers
 from .validators import validate_celular,validate_cpf,validate_email,validate_nome
 
-class LivrosSerializers(serializers.Serializer):
+class LivrosSerializers(serializers.ModelSerializer):
     class Meta:
         model = Livros
         fields = '__all__'
@@ -14,7 +14,7 @@ class LivrosSerializers(serializers.Serializer):
             )
         return data
     
-class UsuariosSerializers(serializers.Serializer):
+class UsuariosSerializers(serializers.ModelSerializer):
     class Meta:
         model = usuarios
         fields = '__all__'
@@ -38,7 +38,7 @@ class UsuariosSerializers(serializers.Serializer):
             )
         return data
 
-class LocacoesSerializer(serializers.Serializer):
+class LocacoesSerializer(serializers.ModelSerializer):
     class Meta:
         model = locacao
-        fields = '__all__'
+        fields = '__all__'  
