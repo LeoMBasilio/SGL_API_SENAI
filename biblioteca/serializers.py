@@ -17,7 +17,7 @@ class LivrosSerializers(serializers.ModelSerializer):
 class UsuariosSerializers(serializers.ModelSerializer):
     class Meta:
         model = usuarios
-        fields = '__all__'
+        fields = ['id', 'nome', 'cpf', 'email', 'celular', 'endereco']
 
     def validate(self, data):
         if not validate_nome(data['nome']):

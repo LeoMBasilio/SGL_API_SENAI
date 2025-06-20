@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Livros(models.Model):
     titulo = models.CharField(max_length=100)
@@ -16,6 +17,7 @@ class usuarios(models.Model):
     email = models.EmailField(max_length=100, unique=True)
     celular = models.CharField(max_length=15)
     endereco = models.CharField(max_length=255)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
             return self.nome
@@ -29,3 +31,4 @@ class locacao(models.Model):
 
     def __str__(self):
          return f'{self.usuario.nome} - {self.livro.titulo}'
+    
