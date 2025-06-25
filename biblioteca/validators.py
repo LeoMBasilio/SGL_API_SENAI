@@ -16,3 +16,9 @@ def validate_celular(data):
 def validate_nome(data):
     regex = r'^[a-zA-z\s]+$'
     return re.match(regex, data) is not None
+
+def validate_quantidade_negativa(data):
+    return data < 0
+    
+def validate_quantidade_em_estoque(data):
+    return data <= 0

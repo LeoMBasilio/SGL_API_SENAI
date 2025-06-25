@@ -8,16 +8,15 @@ from rest_framework.permissions import IsAuthenticated #
 from django_filters.rest_framework import DjangoFilterBackend#
 
 class LivrosViewSets(viewsets.ModelViewSet):
-    authentication_classes = [BasicAuthentication] #
-    permission_classes = [IsAuthenticated] #
-
-    queryset= Livros.objects.all()
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = Livros.objects.all()
     serializer_class = LivrosSerializers
-    filter_backends = [DjangoFilterBackend]#
-    filterset_fields = ['titulo', 'autor']#
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['titulo', 'autor']
 
 class LivrosDataViewSets(viewsets.ModelViewSet):
-    queryset= Livros.objects.all()
+    queryset = Livros.objects.all()
     serializer_class = LivrosSerializers
     filter_backends = [DjangoFilterBackend]
     filterset_class = LivrosFilter
@@ -28,10 +27,14 @@ class UsuariosViewSets(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return usuarios.objects.filter(user=self.request.user)
-    
+
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
 class LocacoesViewSet(viewsets.ModelViewSet):
-    queryset = locacao
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
     serializer_class = LocacoesSerializer
+
+    def get_queryset(self):
+        return locacao.objects.filter(usuario__user=self.request.user)

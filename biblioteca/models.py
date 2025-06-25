@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 class Livros(models.Model):
     titulo = models.CharField(max_length=100)
@@ -7,9 +8,14 @@ class Livros(models.Model):
     paginas = models.IntegerField()
     genero = models.CharField(max_length=100)
     ano_publicacao = models.DateField()
+    quantidade = models.IntegerField()
 
     def __str__(self):
         return self.titulo
+    
+    def clean(self):
+        if self.quantidade < 0:
+            raise ValidationError("Estoque não pode ser negativo")
 
 class usuarios(models.Model):
     nome = models.CharField(max_length=100, null=True)
